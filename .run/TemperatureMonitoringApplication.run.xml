@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="TemperatureMonitoringApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
+    <module name="temperature-monitoring.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.algaworks.algasensors.temperature.monitoring.TemperatureMonitoringApplication" />
+    <option name="VM_PARAMETERS" value="-XX:MaxRAM=256m" />
+    <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/microsservices/temperature-monitoring" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.algaworks.algasensors.temperature.monitoring.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
