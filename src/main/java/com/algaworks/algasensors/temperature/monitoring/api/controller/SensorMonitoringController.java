@@ -6,9 +6,13 @@ import com.algaworks.algasensors.temperature.monitoring.domain.model.SensorMonit
 import com.algaworks.algasensors.temperature.monitoring.domain.repository.SensorMonitoringRepository;
 import io.hypersistence.tsid.TSID;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.time.Duration;
 
 @RestController
 @RequestMapping("/api/sensors/{sensorId}/monitoring")
@@ -42,13 +46,20 @@ public class SensorMonitoringController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void enable(@PathVariable TSID sensorId) {
         SensorMonitoring sensorMonitoring = findByIdOrDefault(sensorId);
+        if(sensorMonitoring.getEnabled()) {
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
         sensorMonitoring.setEnabled(true);
         sensorMonitoringRepository.saveAndFlush(sensorMonitoring);
     }
     @DeleteMapping("enable")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @SneakyThrows
     public void disable(@PathVariable TSID sensorId) {
         SensorMonitoring sensorMonitoring = findByIdOrDefault(sensorId);
+        if(!sensorMonitoring.getEnabled()) {
+            Thread.sleep(Duration.ofSeconds(10));
+        }
         sensorMonitoring.setEnabled(false);
         sensorMonitoringRepository.saveAndFlush(sensorMonitoring);
     }
